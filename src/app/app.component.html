@@ -1,0 +1,30 @@
+<form [formGroup]="testForm">
+  <div>
+    <input type="text" formControlName="title">
+  </div>
+
+  <div>
+    <div *ngFor="let rule of rules">
+      <input type="checkbox" [formControlName]="rule">
+      <span>{{ rule }}</span>
+    </div>
+  </div>
+
+
+
+</form>
+
+<div class="debug">
+  {{ testForm.value | json }}
+</div>
+
+<style>
+  form {
+    height: 300px;
+  }
+
+  .debug {
+    background-color: #e3e3ef;
+    padding: 10px;
+  }
+</style>
