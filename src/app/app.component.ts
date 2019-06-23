@@ -18,10 +18,10 @@ export class AppComponent  {
   
   testForm = this.fb.group({
     title: [ 'Campbelltown' ],
-    rules: this.fb.array(this.getTypesFormGroups())
+    rules: this.getTypesFormArray()
   });
 
-  get rules() {
+  get formRules() {
     return this.testForm.get('rules') as FormArray;
   }
 
@@ -29,31 +29,20 @@ export class AppComponent  {
     
   }
 
-  getTypes(): ICheckBoxItem[] {
-    let checkboxes: ICheckBoxItem[] = [];
+  getTypesFormArray(): FormArray {
+    const groups: FormGroup[] = [];
+
     this.LookupTypes.forEach((type) => {
       const item: ICheckBoxItem = {
         id: type,
         selected: this.dbTypes.indexOf(type) >= 0,
         name: type
-      }
-      checkboxes.push(item);
-    });
-    return checkboxes;
-  }
-
-  getTypesFormGroups(): FormGroup[] {
-    const checkboxes = this.getTypes();
-    const groups: FormGroup[] = [];
-    checkboxes.forEach((box) => {
-      const group = this.fb.group({
-        id: [ box.id ],
-        selected: [ box.selected ],
-        name: [ box.name ],
-      });
+      };
+      const group = this.fb.group(item);
       groups.push(group);
     });
 
-    return groups;
+    return this.fb.array(groups);
   }
+
 }
