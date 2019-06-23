@@ -1,13 +1,24 @@
+<ul>
+  <li *ngFor="let type of LookupTypes">
+    {{ type }}
+  </li>
+</ul>
+
 <form [formGroup]="testForm">
   <div>
     <input type="text" formControlName="title">
   </div>
 
-  <div>
-    <div *ngFor="let r of rules.controls" formGroup="r">
-      <mat-checkbox [formControl]="r.get('selected')">
-        {{r.get('name').value}}
-      </mat-checkbox>
+  <div formArrayName="rules">
+    <div *ngFor="let r of rules.controls; let i=index" >
+      <div [formGroup]="r">
+        <!-- <p>{{ r.value | json }}</p> -->
+        <p>
+          <input type="checkbox" 
+                [checked]="r.value.selected">
+          <label>{{ r.value.name }}</label>
+        </p>
+      </div>
     </div>
   </div>
 
