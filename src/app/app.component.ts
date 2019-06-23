@@ -46,7 +46,11 @@ export class AppComponent  {
     const checkboxes = this.getTypes();
     const groups: FormGroup[] = [];
     checkboxes.forEach((box) => {
-      const group = this.fb.group(box);
+      const group = this.fb.group({
+        id: [ box.id ],
+        selected: [ box.selected ],
+        name: [ box.name ],
+      });
       groups.push(group);
     });
 

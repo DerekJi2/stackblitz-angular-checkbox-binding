@@ -15,8 +15,9 @@
         <!-- <p>{{ r.value | json }}</p> -->
         <p>
           <input type="checkbox" 
-                [checked]="r.value.selected">
-          <label>{{ r.value.name }}</label>
+                id="box{{i}}"
+                >
+          <label for="box{{i}}">{{ r.value.name }}</label>
         </p>
       </div>
     </div>
