@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormArray, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'my-app',
@@ -23,8 +23,24 @@ export class AppComponent  {
   
   testForm = this.fb.group({
     title: [ 'Campbelltown' ],
-    rules: this.fb.array(
-      this.Rules.map(() => false)
-    )
+    rules: this.mapToCheckboxArrayGroup(this.Rules)
   });
+
+  get formRules() {
+    return this.testForm.get('rules');
+  }
+
+  ngOnInit() {
+    
+  }
+
+  private mapToCheckboxArrayGroup(data: string[]): FormArray {
+    return this.fb.array(data.map((i) => {
+      return this.fb.group({
+        name: i,
+        selected: false
+      });
+    }));
+}
+
 }

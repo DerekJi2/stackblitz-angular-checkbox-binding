@@ -4,9 +4,10 @@
   </div>
 
   <div>
-    <div *ngFor="let rule of rules">
-      <input type="checkbox" [formControlName]="rule">
-      <span>{{ rule }}</span>
+    <div *ngFor="let r of rules.controls" formGroup="r">
+      <mat-checkbox [formControl]="r.get('selected')">
+        {{r.get('name').value}}
+      </mat-checkbox>
     </div>
   </div>
 
@@ -28,3 +29,5 @@
     padding: 10px;
   }
 </style>
+
+<!--  https://blog.grossman.io/real-world-angular-reactive-forms/ -->
